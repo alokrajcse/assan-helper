@@ -34,6 +34,7 @@ import androidx.navigation.compose.*
 import com.example.helper.screens.DrawerContent
 import com.example.helper.screens.HomeScreen
 import com.example.helper.screens.LogoutScreen
+import com.example.helper.screens.Notifications
 import com.example.helper.screens.ProfileScreen
 import com.example.helper.screens.SearchScreen
 import com.example.helper.screens.SettingsScreen
@@ -108,9 +109,11 @@ fun SidebarDemo(navController: NavHostController) {
                         }
                     )
                     { SearchScreen(navController = navController) }
-                    composable("profile") { ProfileScreen() }
+                    composable("profile") { ProfileScreen(navController=navController) }
                     composable("settings") { SettingsScreen() }
                     composable("logout") { LogoutScreen() }
+                    composable("notificationscreen") { Notifications(navController=navController) }
+//                    composable("profilescreen") { ProfileScreen(navController=navController) }
                 }
             }
         }

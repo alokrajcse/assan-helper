@@ -25,6 +25,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -62,7 +63,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
                         }
                     },
                     actions = {
-                        IconButton(onClick = { /* Handle notification click */ }) {
+                        IconButton(onClick = { navController.navigate("notificationscreen") }) {
                             Icon(Icons.Default.Notifications, contentDescription = "Notifications")
                         }
                     }
@@ -182,7 +183,26 @@ fun Tools() {
             .background(color = colorResource(R.color.white))
             .padding(10.dp)
     ) {
-        repeat(5) {
+        Column(modifier = Modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                painter = painterResource(R.drawable.calculator),
+                contentDescription = null,
+                modifier = Modifier.width(40.dp)
+            )
+            Text(text = "CGPA\nCalculator",textAlign= TextAlign.Center, fontSize = 14.sp)
+        }
+        Column(modifier = Modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+
+                Image(
+                    painter = painterResource(R.drawable.attendance),
+                    contentDescription = null,
+                    modifier = Modifier.width(40.dp)
+                )
+
+
+            Text(text = "Attendance\nCalculator",textAlign= TextAlign.Center, fontSize = 14.sp)
+        }
+        repeat(4) {
             Column(modifier = Modifier.padding(10.dp)) {
                 Image(
                     painter = painterResource(R.drawable.img4),
@@ -300,12 +320,12 @@ fun DrawerContent(onItemClick: (String) -> Unit) {
 }
 
 // Screens
-@Composable
-fun ProfileScreen() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Profile Screen", fontSize = 24.sp, fontWeight = FontWeight.Bold)
-    }
-}
+//@Composable
+//fun ProfileScreen() {
+//    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+//        Text(text = "Profile Screen", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+//    }
+//}
 
 @Composable
 fun SettingsScreen() {
