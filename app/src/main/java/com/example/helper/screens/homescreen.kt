@@ -77,7 +77,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
                     .padding(paddingValues)
             ) {
                 item {
-                    Header()
+                    Header(navController)
                     Spacer(modifier = Modifier.height(16.dp))
                     SearchBar(navController,paddingValues)
                     Spacer(modifier = Modifier.height(16.dp))
@@ -145,13 +145,14 @@ fun SearchBar(navController: NavController,paddingValues: PaddingValues) {
 }
 
 @Composable
-fun Header() {
+fun Header(navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
             .background(color = colorResource(R.color.teal_200))
             .padding(10.dp)
+            .clickable(onClick = {navController.navigate("profile")})
     ) {
         Column(modifier = Modifier.padding(10.dp)) {
             Text("Hey ", color = Color.White, fontSize = 32.sp)
@@ -183,15 +184,23 @@ fun Tools() {
             .background(color = colorResource(R.color.white))
             .padding(10.dp)
     ) {
-        Column(modifier = Modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(modifier = Modifier.padding(5.dp).weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                painter = painterResource(R.drawable.notes),
+                contentDescription = null,
+                modifier = Modifier.width(40.dp)
+            )
+            Text(text = "Class\nNotes",textAlign= TextAlign.Center, fontSize = 12.sp, style = TextStyle(fontWeight = FontWeight.Bold))
+        }
+        Column(modifier = Modifier.padding(5.dp).weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
                 painter = painterResource(R.drawable.calculator),
                 contentDescription = null,
                 modifier = Modifier.width(40.dp)
             )
-            Text(text = "CGPA\nCalculator",textAlign= TextAlign.Center, fontSize = 14.sp)
+            Text(text = "CGPA\nCalculator",textAlign= TextAlign.Center, fontSize = 12.sp, style = TextStyle(fontWeight = FontWeight.Bold))
         }
-        Column(modifier = Modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(modifier = Modifier.padding(5.dp).weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
 
                 Image(
                     painter = painterResource(R.drawable.attendance),
@@ -200,18 +209,29 @@ fun Tools() {
                 )
 
 
-            Text(text = "Attendance\nCalculator",textAlign= TextAlign.Center, fontSize = 14.sp)
+            Text(text = "Attendance\nCalculator",textAlign= TextAlign.Center, fontSize = 12.sp, style = TextStyle(fontWeight = FontWeight.Bold))
         }
-        repeat(4) {
-            Column(modifier = Modifier.padding(10.dp)) {
-                Image(
-                    painter = painterResource(R.drawable.img4),
-                    contentDescription = null,
-                    modifier = Modifier.width(40.dp)
-                )
-                Text("Tool")
-            }
+        Column(modifier = Modifier.padding(5.dp).weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
+
+            Image(
+                painter = painterResource(R.drawable.barcodescanner),
+                contentDescription = null,
+                modifier = Modifier.width(40.dp)
+            )
+
+
+            Text(text = "Generate\nBarcode",textAlign= TextAlign.Center, fontSize = 12.sp, style = TextStyle(fontWeight = FontWeight.Bold))
         }
+//        repeat(4) {
+//            Column(modifier = Modifier.padding(10.dp)) {
+//                Image(
+//                    painter = painterResource(R.drawable.img4),
+//                    contentDescription = null,
+//                    modifier = Modifier.width(40.dp)
+//                )
+//                Text("Tool")
+//            }
+//        }
     }
 }
 

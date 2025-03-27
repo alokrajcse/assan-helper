@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -34,7 +35,7 @@ fun SearchScreen(navController: NavController) {
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            SearchBar2 { query ->
+            SearchBar2(navController) { query ->
                 searchResults.clear()
                 if (query.isNotEmpty()) {
                     searchResults.addAll(generateSearchResults(query)) // Simulated search
@@ -59,7 +60,7 @@ fun SearchScreen(navController: NavController) {
 }
 
 @Composable
-fun SearchBar2(onSearch: (String) -> Unit) {
+fun SearchBar2(navController: NavController, onSearch: (String) -> Unit) {
     var searchText by remember { mutableStateOf("") }
     var animatedText by remember { mutableStateOf("") }
     val placeholderText = "Search Notes..."
@@ -79,6 +80,18 @@ fun SearchBar2(onSearch: (String) -> Unit) {
             .padding(16.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
+
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "Search Icon",
+                tint = Color.Gray,
+                modifier = Modifier.size(24.dp)
+                    .clickable(onClick = {
+                        navController.popBackStack()
+                    })
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = "Search Icon",
