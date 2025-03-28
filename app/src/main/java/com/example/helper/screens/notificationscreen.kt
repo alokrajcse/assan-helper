@@ -34,6 +34,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.style.TextAlign
 
+import com.example.helper.screens.notification.NotificationDisp
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Notifications(modifier: Modifier = Modifier,navController: NavController) {
@@ -66,6 +68,7 @@ fun Notifications(modifier: Modifier = Modifier,navController: NavController) {
             Column(modifier = Modifier
                 .padding(10.dp)
                 .fillMaxWidth()) {
+                NotificationDisp()
                 NotificationItem()
                 NotificationItem()
                 NotificationItem()
