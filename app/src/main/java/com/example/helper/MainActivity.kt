@@ -31,6 +31,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
+import com.example.helper.screens.ClassNotes.allNotesScreen
+import com.example.helper.screens.ClassNotes.branchSelectScreen
+import com.example.helper.screens.ClassNotes.notesDetailScreen
+import com.example.helper.screens.ClassNotes.semesterSelectScreen
 import com.example.helper.screens.DrawerContent
 import com.example.helper.screens.HomeScreen
 import com.example.helper.screens.LogoutScreen
@@ -38,6 +42,9 @@ import com.example.helper.screens.Notifications
 import com.example.helper.screens.ProfileScreen
 import com.example.helper.screens.SearchScreen
 import com.example.helper.screens.SettingsScreen
+import com.example.helper.screens.registration.loginScreen
+import com.example.helper.screens.requestnotes.requestNotesScreen
+import com.example.helper.screens.uploadnotes.UploadNotesScreen
 import com.example.helper.ui.theme.HelperTheme
 import kotlinx.coroutines.launch
 
@@ -75,7 +82,8 @@ fun SidebarDemo(navController: NavHostController) {
 
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
-                NavHost(navController, startDestination = "home") {
+                NavHost(navController, startDestination = "login") {
+                    composable("login") { loginScreen(navController=navController) }
                     composable("home") { HomeScreen(navController=navController) }
                     composable(
                         "searchScreen",
@@ -113,6 +121,12 @@ fun SidebarDemo(navController: NavHostController) {
                     composable("settings") { SettingsScreen() }
                     composable("logout") { LogoutScreen() }
                     composable("notificationscreen") { Notifications(navController=navController) }
+                    composable("uploadnotesscreen") { UploadNotesScreen(navController=navController) }
+                    composable("requestnotesscreen") { requestNotesScreen(navController=navController) }
+                    composable("branchselectscreen") { branchSelectScreen(navController=navController) }
+                    composable("semesterselectscreen") { semesterSelectScreen(navController=navController) }
+                    composable("allnotesscreen") { allNotesScreen(navController=navController) }
+                    composable("notesdetailscreen") { notesDetailScreen(navController=navController) }
 //                    composable("profilescreen") { ProfileScreen(navController=navController) }
                 }
             }

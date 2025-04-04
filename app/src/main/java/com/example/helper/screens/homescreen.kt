@@ -133,13 +133,13 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
                                 .padding(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp) // Ensures spacing is uniform
                         ) {
-                            UploadYourNotes(modifier = Modifier.weight(1f))
-                            RequestNotes(modifier = Modifier.weight(1f))
+                            UploadYourNotes(navController = navController, modifier = Modifier.weight(1f))
+                            RequestNotes(navController,modifier = Modifier.weight(1f))
                         }
                         Spacer(modifier = Modifier.height(16.dp))
                         Carousel()
                         Spacer(modifier = Modifier.height(16.dp))
-                        Tools()
+                        Tools(navController)
                         Spacer(modifier = Modifier.height(16.dp))
                         Carousel()
                         Spacer(modifier = Modifier.height(16.dp))
@@ -238,9 +238,11 @@ fun SearchBar(navController: NavController,paddingValues: PaddingValues) {
 }
 
 @Composable
-fun UploadYourNotes(modifier: Modifier = Modifier) {
+fun UploadYourNotes(navController: NavController,modifier: Modifier = Modifier) {
     ExtendedFloatingActionButton(
-        onClick = { /* Handle Upload */ },
+        onClick = {
+            navController.navigate("uploadnotesscreen")
+        },
         modifier = modifier.fillMaxWidth(), // Ensures equal width
         containerColor = MaterialTheme.colorScheme.primary
     ) {
@@ -257,9 +259,11 @@ fun UploadYourNotes(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun RequestNotes(modifier: Modifier = Modifier) {
+fun RequestNotes(navController: NavController,modifier: Modifier = Modifier) {
     ExtendedFloatingActionButton(
-        onClick = { /* Handle Request */ },
+        onClick = {
+            navController.navigate("requestnotesscreen")
+        },
         modifier = modifier.fillMaxWidth(), // Ensures equal width
         containerColor = MaterialTheme.colorScheme.secondary
     ) {
@@ -306,7 +310,7 @@ fun Header(navController: NavController) {
 }
 
 @Composable
-fun Tools() {
+fun Tools(navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -321,6 +325,10 @@ fun Tools() {
                 painter = painterResource(R.drawable.notes),
                 contentDescription = null,
                 modifier = Modifier.width(40.dp)
+                    .clickable(onClick = {
+                        navController.navigate("branchselectscreen")
+
+                    })
             )
             Text(text = "Class\nNotes",textAlign= TextAlign.Center, fontSize = 12.sp, style = TextStyle(fontWeight = FontWeight.Bold))
         }
