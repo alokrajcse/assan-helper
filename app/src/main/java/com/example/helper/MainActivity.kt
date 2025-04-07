@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
+import androidx.navigation.navArgument
 import com.example.helper.screens.ClassNotes.allNotesScreen
 import com.example.helper.screens.ClassNotes.branchSelectScreen
 import com.example.helper.screens.ClassNotes.notesDetailScreen
@@ -124,8 +125,13 @@ fun SidebarDemo(navController: NavHostController) {
                     composable("uploadnotesscreen") { UploadNotesScreen(navController=navController) }
                     composable("requestnotesscreen") { requestNotesScreen(navController=navController) }
                     composable("branchselectscreen") { branchSelectScreen(navController=navController) }
-                    composable("semesterselectscreen") { semesterSelectScreen(navController=navController) }
-                    composable("allnotesscreen") { allNotesScreen(navController=navController) }
+                    composable("semesterselectscreen/{branchname}") { backstackEntry->
+                        var branchname=backstackEntry.arguments?.getString("branchname")
+                        semesterSelectScreen(navController=navController,branchname=branchname.toString())  }
+                    composable("allnotesscreen/{branchname}/{semestername}") { backstackEntry->
+                        var branchname=backstackEntry.arguments?.getString("branchname")
+                        var semestername=backstackEntry.arguments?.getString("semestername")
+                        allNotesScreen(navController=navController,branchname=branchname,semestername=semestername) }
                     composable("notesdetailscreen") { notesDetailScreen(navController=navController) }
 //                    composable("profilescreen") { ProfileScreen(navController=navController) }
                 }

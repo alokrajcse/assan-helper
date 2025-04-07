@@ -204,12 +204,15 @@ fun SearchBar(navController: NavController,paddingValues: PaddingValues) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .border(1.dp, Color.Gray, shape = RoundedCornerShape(16.dp))
             .clip(RoundedCornerShape(16.dp))
             .background(color = Color.White)
+
             .clickable { navController.navigate("searchScreen") } // Fixed clickable position
             .padding(horizontal = 16.dp, vertical = 12.dp)
+
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(verticalAlignment = Alignment.CenterVertically, ) {
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = "Search Icon",
@@ -297,14 +300,17 @@ fun Header(navController: NavController) {
         Spacer(modifier = Modifier.weight(1f)) // Push image to the right
 
         Image(
-            painter = painterResource(id = R.drawable.img3),
+            painter = painterResource(id = R.drawable.img4),
             contentDescription = "App Logo",
-            contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(100.dp)
+
                 .clip(CircleShape)
                 .background(Color.Gray)
-                .padding(5.dp)
+                .size(100.dp)
+//                .padding(5.dp)
+            ,
+            contentScale = ContentScale.FillWidth
+
         )
     }
 }
