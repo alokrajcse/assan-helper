@@ -36,7 +36,7 @@ import androidx.navigation.NavController
 @Composable
 fun branchSelectScreen(navController: NavController,modifier: Modifier = Modifier,) {
     val colorStops = arrayOf(
-        0.0f to colorResource(R.color.indigo),
+        0.0f to colorResource(R.color.darkpurple),
         0.2f to colorResource(R.color.lavenderblush),
         1f to colorResource(R.color.lavenderblush),
     )
@@ -44,13 +44,13 @@ fun branchSelectScreen(navController: NavController,modifier: Modifier = Modifie
     var branchlist=listOf("FirstYear","CSE","CST","CEN","ECE","EEE","EIE")
 
     Scaffold(topBar = { TopAppBar(
-        title = {Text("Class Notes", fontWeight = FontWeight.Bold, color = Color.Black)}
+        title = {Text("Class Notes", fontWeight = FontWeight.Bold, color = Color.White)}
     , navigationIcon = {
         IconButton(onClick = { navController.popBackStack() }) {
-            Icon(Icons.Default.ArrowBack, contentDescription = "Back btn", tint = Color.Black)
+            Icon(Icons.Default.ArrowBack, contentDescription = "Back btn", tint = Color.White)
         }
         }
-        , colors = TopAppBarDefaults.smallTopAppBarColors(colorResource(R.color.indigo)))  },
+        , colors = TopAppBarDefaults.smallTopAppBarColors(colorResource(R.color.darkpurple)))  },
 
          bottomBar = {
             Box(modifier = Modifier.fillMaxWidth().background(colorResource(R.color.lavenderblush)).padding(10.dp), contentAlignment = Alignment.TopStart){

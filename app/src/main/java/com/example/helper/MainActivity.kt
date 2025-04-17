@@ -28,6 +28,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
@@ -56,6 +58,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             HelperTheme {
+//                WindowCompat.setDecorFitsSystemWindows(window, false)
+//                WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
                 val navController: NavHostController = rememberNavController()
                 SidebarDemo(navController)
             }

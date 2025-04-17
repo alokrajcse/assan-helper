@@ -33,7 +33,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.helper.MyViewModels.MyViewModel
 import com.example.helper.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -94,27 +96,28 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text("Study ASSAN") },
+                    title = { Text("Study ASSAN", color = Color.Black, fontWeight = FontWeight.Bold) },
                     navigationIcon = {
                         IconButton(onClick = {
                             coroutineScope.launch {
                                 if (drawerState.isClosed) drawerState.open() else drawerState.close()
                             }
                         }) {
-                            Icon(Icons.Default.Menu, contentDescription = "Menu")
+                            Icon(Icons.Default.Menu, contentDescription = "Menu", tint = Color.Black)
                         }
                     },
                     actions = {
                         IconButton(onClick = { navController.navigate("notificationscreen") }) {
-                            Icon(Icons.Default.Notifications, contentDescription = "Notifications")
+                            Icon(Icons.Default.Notifications, contentDescription = "Notifications", tint = Color.Black)
                         }
                     }
-                )
+                , colors = TopAppBarDefaults.smallTopAppBarColors(Color.White))
             }
         ) { paddingValues ->
-            Box(modifier = Modifier.fillMaxSize()) {
-
-
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White))
+            {
 
                 LazyColumn(
                     modifier = Modifier
@@ -153,8 +156,11 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
                         )
                         DonateCard(onDonateClick = {})
                         Spacer(modifier = Modifier.height(90.dp))
+                        viewmodelcheck()
                     }
                 }
+
+
 //                Row (modifier = Modifier.fillMaxWidth().align(Alignment.BottomEnd), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically){
 //
 //                    Column {
@@ -207,7 +213,6 @@ fun SearchBar(navController: NavController,paddingValues: PaddingValues) {
             .border(1.dp, Color.Gray, shape = RoundedCornerShape(16.dp))
             .clip(RoundedCornerShape(16.dp))
             .background(color = Color.White)
-
             .clickable { navController.navigate("searchScreen") } // Fixed clickable position
             .padding(horizontal = 16.dp, vertical = 12.dp)
 
@@ -247,16 +252,16 @@ fun UploadYourNotes(navController: NavController,modifier: Modifier = Modifier) 
             navController.navigate("uploadnotesscreen")
         },
         modifier = modifier.fillMaxWidth(), // Ensures equal width
-        containerColor = MaterialTheme.colorScheme.primary
+        containerColor = Color.DarkGray
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(), // Makes inner Row stretch fully
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(Icons.Filled.Add, contentDescription = "Upload Notes")
+            Icon(Icons.Filled.Add, contentDescription = "Upload Notes", tint = Color.White)
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Upload Notes")
+            Text("Upload Notes", color = Color.White)
         }
     }
 }
@@ -268,16 +273,16 @@ fun RequestNotes(navController: NavController,modifier: Modifier = Modifier) {
             navController.navigate("requestnotesscreen")
         },
         modifier = modifier.fillMaxWidth(), // Ensures equal width
-        containerColor = MaterialTheme.colorScheme.secondary
+        containerColor = Color.DarkGray
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(Icons.Filled.Email, contentDescription = "Request Notes")
+            Icon(Icons.Filled.Email, contentDescription = "Request Notes", tint = Color.White)
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Request Notes")
+            Text("Request Notes", color = Color.White)
         }
     }
 }
@@ -287,7 +292,7 @@ fun Header(navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
-            .background(color = colorResource(R.color.teal_200))
+            .background(color = colorResource(R.color.darkpurple))
             .padding(10.dp)
             .clickable(onClick = { navController.navigate("profile") })
     ) {
@@ -330,13 +335,14 @@ fun Tools(navController: NavController) {
             Image(
                 painter = painterResource(R.drawable.notes),
                 contentDescription = null,
-                modifier = Modifier.width(40.dp)
+                modifier = Modifier
+                    .width(40.dp)
                     .clickable(onClick = {
                         navController.navigate("branchselectscreen")
 
                     })
             )
-            Text(text = "Class\nNotes",textAlign= TextAlign.Center, fontSize = 12.sp, style = TextStyle(fontWeight = FontWeight.Bold))
+            Text(text = "Class\nNotes",textAlign= TextAlign.Center, fontSize = 12.sp, style = TextStyle(fontWeight = FontWeight.Bold), color = Color.Black)
         }
         Column(modifier = Modifier
             .padding(5.dp)
@@ -346,7 +352,7 @@ fun Tools(navController: NavController) {
                 contentDescription = null,
                 modifier = Modifier.width(40.dp)
             )
-            Text(text = "CGPA\nCalculator",textAlign= TextAlign.Center, fontSize = 12.sp, style = TextStyle(fontWeight = FontWeight.Bold))
+            Text(text = "CGPA\nCalculator",textAlign= TextAlign.Center, fontSize = 12.sp, style = TextStyle(fontWeight = FontWeight.Bold),color = Color.Black)
         }
         Column(modifier = Modifier
             .padding(5.dp)
@@ -359,7 +365,7 @@ fun Tools(navController: NavController) {
                 )
 
 
-            Text(text = "Attendance\nCalculator",textAlign= TextAlign.Center, fontSize = 12.sp, style = TextStyle(fontWeight = FontWeight.Bold))
+            Text(text = "Attendance\nCalculator",textAlign= TextAlign.Center, fontSize = 12.sp, style = TextStyle(fontWeight = FontWeight.Bold),color = Color.Black)
         }
         Column(modifier = Modifier
             .padding(5.dp)
@@ -372,7 +378,7 @@ fun Tools(navController: NavController) {
             )
 
 
-            Text(text = "Generate\nBarcode",textAlign= TextAlign.Center, fontSize = 12.sp, style = TextStyle(fontWeight = FontWeight.Bold))
+            Text(text = "Generate\nBarcode",textAlign= TextAlign.Center, fontSize = 12.sp, style = TextStyle(fontWeight = FontWeight.Bold), color = Color.Black)
         }
 //        repeat(4) {
 //            Column(modifier = Modifier.padding(10.dp)) {
@@ -391,7 +397,10 @@ fun Tools(navController: NavController) {
 @Composable
 fun Carousel() {
     val items = listOf("Slide 1", "Slide 2", "Slide 3", "Slide 4")
-    val pagerState = rememberPagerState { items.size }
+
+
+    var imageList= listOf(R.drawable.bannerimg3,R.drawable.bannerimg2,R.drawable.bannerimg1,R.drawable.bannerimg2,R.drawable.bannerimg3)
+    val pagerState = rememberPagerState { imageList.size }
 
     Column {
         HorizontalPager(state = pagerState, modifier = Modifier.fillMaxWidth()) { page ->
@@ -400,11 +409,17 @@ fun Carousel() {
                     .fillMaxWidth()
                     .height(150.dp)
                     .clip(RoundedCornerShape(16.dp))
-                    .background(color = colorResource(R.color.teal_200))
-                    .padding(16.dp),
-                contentAlignment = Alignment.Center
+                    .background(color = colorResource(R.color.indigo))
+//                    .padding(16.dp)
+                ,contentAlignment = Alignment.Center
             ) {
-                Text(text = items[page], fontSize = 22.sp, color = Color.White)
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    Image(painter = painterResource(imageList[page]),contentDescription = null, modifier = Modifier.fillMaxWidth(), contentScale = ContentScale.FillWidth)
+
+                }
+
+
+//                Text(text = items[page], fontSize = 22.sp, color = Color.White)
             }
         }
 
@@ -414,13 +429,13 @@ fun Carousel() {
                 .padding(top = 8.dp),
             horizontalArrangement = Arrangement.Center
         ) {
-            items.indices.forEach { index ->
+            imageList.indices.forEach { index ->
                 Box(
                     modifier = Modifier
                         .size(if (pagerState.currentPage == index) 12.dp else 8.dp)
                         .background(
                             color = if (pagerState.currentPage == index)
-                                colorResource(R.color.teal_200)
+                                colorResource(R.color.darkpurple)
                             else Color.Gray,
                             shape = RoundedCornerShape(50)
                         )
@@ -452,7 +467,11 @@ fun Cards(onFeedbackClick: () -> Unit, onContactUsClick: () -> Unit) {
                 modifier = Modifier
                     .padding(15.dp)
                     .clickable { cardItem.onClick() }
-            ) {
+            , border = BorderStroke(5.dp, color = colorResource(R.color.darkpurple))
+            , colors = CardDefaults.cardColors(containerColor = Color.White)
+                ,
+                elevation = CardDefaults.cardElevation(5.dp)
+                ) {
                 Column(
                     modifier = Modifier.padding(15.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -540,7 +559,7 @@ fun DonateCard(onDonateClick: () -> Unit) {
             .padding(10.dp),
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(4.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+        colors = CardDefaults.cardColors(containerColor = colorResource(R.color.darkpurple))
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -549,21 +568,43 @@ fun DonateCard(onDonateClick: () -> Unit) {
             Text(
                 text = "Support Us by Donating \uD83E\uDD7A ",
                 style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = Color.White
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "Your support helps us grow and improve!❤️",
                 style = MaterialTheme.typography.bodyMedium,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = Color.White
             )
             Spacer(modifier = Modifier.height(12.dp))
             Button(
                 onClick = onDonateClick,
-                colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.teal_200)) // Green Color
+                colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.white),
+                    ),
+                border = BorderStroke(2.dp, Color.Black),
+                shape = RoundedCornerShape(10.dp)// Green Color
             ) {
-                Text(text = "Donate", color = Color.White)
+                Text(text = "Donate", color = Color.Black)
             }
         }
     }
+}
+
+
+@Composable
+fun viewmodelcheck(viewModel: MyViewModel= viewModel(), modifier: Modifier = Modifier) {
+
+    val text=viewModel.text.collectAsState()
+
+    Column {
+        Text(text = text.value)
+        Button(onClick = { viewModel.updateText("New Text") }) {
+            Text("Update Text")
+        }
+
+    }
+
+    
 }

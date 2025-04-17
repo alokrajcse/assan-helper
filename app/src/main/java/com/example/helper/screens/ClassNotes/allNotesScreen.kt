@@ -64,52 +64,57 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.helper.MyViewModels.MyViewModel
 import com.example.helper.data.noteItem
 import kotlinx.coroutines.delay
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun allNotesScreen(navController: NavController,modifier: Modifier = Modifier,  branchname:String?, semestername:String?) {
+fun allNotesScreen(viewModel: MyViewModel= viewModel(), navController: NavController, modifier: Modifier = Modifier, branchname:String?, semestername:String?) {
 
 
-    var noteslist by remember {
-        mutableStateOf(
-            listOf(
-                noteItem("Note1", "Compiler Design"),
-                noteItem("Note2", "Compiler Design"),
-                noteItem("Note3", "Computer Graphics"),
-                noteItem("Note4", "Computer Graphics"),
-                noteItem("Note5", "Computer Graphics"),
-                noteItem("Note6", "Cloud Computing"),
-                noteItem("Note7", "Cloud Computing"),
-                noteItem("Note8", "Cloud Computing"),
-                noteItem("Note9", "IoT"),
-                noteItem("Note10", "IoT"),
-                noteItem("Note11", "IoT"),
-                noteItem("Note12", "Software Engineering"),
-                noteItem("Note13", "Software Engineering"),
-                noteItem("Note14", "Software Engineering"),
-                noteItem("Lexical Analysis", "Compiler Design"),
-                noteItem("Parsing Techniques", "Compiler Design"),
-                noteItem("Intermediate Code Gen", "Compiler Design"),
-                noteItem("2D Transformations", "Computer Graphics"),
-                noteItem("3D Modeling", "Computer Graphics"),
-                noteItem("Lighting & Shading", "Computer Graphics"),
-                noteItem("Intro to Cloud", "Cloud Cloud"),
-                noteItem("Cloud Deployment Models", "Cloud Cloud"),
-                noteItem("Cloud Security", "Cloud Cloud"),
-                noteItem("IoT Architecture", "IoT"),
-                noteItem("IoT Protocols", "IoT"),
-                noteItem("Sensor Networks", "IoT"),
-                noteItem("Agile Methodology", "Software Engineering"),
-                noteItem("Design Patterns", "Software Engineering"),
-                noteItem("Project Management", "Software Engineering")
-            )
-        )
-    }
 
+    var noteslist = viewModel.notelist
+
+//    var noteslist by remember {
+//        mutableStateOf(
+//            listOf(
+//                noteItem("Note1", "Compiler Design"),
+//                noteItem("Note2", "Compiler Design"),
+//                noteItem("Note3", "Computer Graphics"),
+//                noteItem("Note4", "Computer Graphics"),
+//                noteItem("Note5", "Computer Graphics"),
+//                noteItem("Note6", "Cloud Computing"),
+//                noteItem("Note7", "Cloud Computing"),
+//                noteItem("Note8", "Cloud Computing"),
+//                noteItem("Note9", "IoT"),
+//                noteItem("Note10", "IoT"),
+//                noteItem("Note11", "IoT"),
+//                noteItem("Note12", "Software Engineering"),
+//                noteItem("Note13", "Software Engineering"),
+//                noteItem("Note14", "Software Engineering"),
+//                noteItem("Lexical Analysis", "Compiler Design"),
+//                noteItem("Parsing Techniques", "Compiler Design"),
+//                noteItem("Intermediate Code Gen", "Compiler Design"),
+//                noteItem("2D Transformations", "Computer Graphics"),
+//                noteItem("3D Modeling", "Computer Graphics"),
+//                noteItem("Lighting & Shading", "Computer Graphics"),
+//                noteItem("Intro to Cloud", "Cloud Cloud"),
+//                noteItem("Cloud Deployment Models", "Cloud Cloud"),
+//                noteItem("Cloud Security", "Cloud Cloud"),
+//                noteItem("IoT Architecture", "IoT"),
+//                noteItem("IoT Protocols", "IoT"),
+//                noteItem("Sensor Networks", "IoT"),
+//                noteItem("Agile Methodology", "Software Engineering"),
+//                noteItem("Design Patterns", "Software Engineering"),
+//                noteItem("Project Management", "Software Engineering")
+//            )
+//        )
+//    }
+//
 
     var searchText by remember { mutableStateOf("") }
     var categories=noteslist.groupBy { it.noteCategory }
